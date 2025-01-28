@@ -10,7 +10,7 @@ class NotesDB extends Dexie {
 		super('notesDB');
 		this.version(1).stores({
 			users: '++id, email, password',
-			notes: '++id, title, content, updatedAt',
+			notes: '++id, userId, title, content, updatedAt',
 		});
 	}
 }

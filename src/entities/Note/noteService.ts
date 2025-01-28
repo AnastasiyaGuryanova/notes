@@ -1,0 +1,21 @@
+import { db } from 'shared/api';
+import { Note } from './noteModel';
+
+export const getNotesByUser = async (userId: string): Promise<Note[]> => {
+	return await db.notes.where('userId').equals(userId).toArray();
+};
+
+export const createNote = async (
+	userId: string,
+	title: string,
+	content: string
+): Promise<void> => {
+	await db.notes.add({ userId, title, content, updatedAt: new Date() });
+};
+export const updateNote = async (id: number, content: string): Promise<void> => {
+	await db.notes.update(id, { content, updatedAt: new Date() });
+};
+
+export const deleteNote = async (id: number): Promise<void> => {
+	await db.notes.delete(id);
+};
