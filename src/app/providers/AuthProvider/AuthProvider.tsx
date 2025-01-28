@@ -5,11 +5,10 @@ import {
 	authStorage,
 	AuthContext,
 } from 'features/auth';
-import { createUser, validateUser } from 'entities/User';
-import { SigninUserType } from 'shared/types';
+import { createUser, User, validateUser } from 'entities/User';
 
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
-	const [user, setUser] = useState<SigninUserType | null>(() =>
+	const [user, setUser] = useState<User | null>(() =>
 		authStorage.getUserFromLocalStorage()
 	);
 

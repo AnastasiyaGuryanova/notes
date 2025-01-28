@@ -1,4 +1,4 @@
-import { db } from '../../shared/api/db';
+import { db } from 'shared/api/db';
 import { User } from './userModel';
 
 export const createUser = async (email: string, password: string): Promise<User> => {

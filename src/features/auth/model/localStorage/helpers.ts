@@ -1,12 +1,12 @@
-import { SigninUserType } from 'shared';
-import { LOCAL_STORAGE_USER_KEY } from 'features';
+import { User } from 'entities/User';
+import { LOCAL_STORAGE_USER_KEY } from 'features/auth';
 
-const getUserFromLocalStorage = (): SigninUserType | null => {
+const getUserFromLocalStorage = (): User | null => {
 	const storedUser = localStorage.getItem(LOCAL_STORAGE_USER_KEY);
 	return storedUser ? JSON.parse(storedUser) : null;
 };
 
-const saveUserToLocalStorage = (user: SigninUserType) => {
+const saveUserToLocalStorage = (user: User) => {
 	localStorage.setItem(LOCAL_STORAGE_USER_KEY, JSON.stringify(user));
 };
 
