@@ -1,11 +1,16 @@
 import { FC } from 'react';
-import { Box, TextInput, PasswordInput, Button } from '@mantine/core';
+import { Box, TextInput, PasswordInput, Text } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { IconAt } from '@tabler/icons-react';
 import { useForm } from '@mantine/form';
 import { SignupFormProps } from './SignupFormProps';
+import { Button } from 'shared/ui';
 
-export const SignupForm: FC<SignupFormProps> = ({ onSubmit }: SignupFormProps) => {
+export const SignupForm: FC<SignupFormProps> = ({
+	onSubmit,
+	error,
+	onErrorReset,
+}: SignupFormProps) => {
 	const isSmallScreen = useMediaQuery('(max-width: 768px)');
 
 	const form = useForm({
@@ -46,6 +51,10 @@ export const SignupForm: FC<SignupFormProps> = ({ onSubmit }: SignupFormProps) =
 				required
 				leftSection={icon}
 				{...form.getInputProps('email')}
+				onChange={(event) => {
+					form.getInputProps('email').onChange(event);
+					onErrorReset();
+				}}
 			/>
 
 			<PasswordInput
@@ -54,6 +63,10 @@ export const SignupForm: FC<SignupFormProps> = ({ onSubmit }: SignupFormProps) =
 				placeholder="Введите пароль"
 				required
 				{...form.getInputProps('password')}
+				onChange={(event) => {
+					form.getInputProps('password').onChange(event);
+					onErrorReset();
+				}}
 			/>
 
 			<PasswordInput
@@ -62,18 +75,19 @@ export const SignupForm: FC<SignupFormProps> = ({ onSubmit }: SignupFormProps) =
 				placeholder="Введите пароль повторно"
 				required
 				{...form.getInputProps('confirmPassword')}
+				onChange={(event) => {
+					form.getInputProps('confirmPassword').onChange(event);
+					onErrorReset();
+				}}
 			/>
 
-			<Button
-				type="submit"
-				styles={(theme) => ({
-					root: {
-						backgroundColor: theme.colors.gray[4],
-					},
-				})}
-			>
-				Зарегистрироваться
-			</Button>
+			<Button type="submit">Зарегистрироваться</Button>
+
+			{error && (
+				<Text c="red" size="sm" ta="center">
+					{error}
+				</Text>
+			)}
 		</Box>
 	);
 };

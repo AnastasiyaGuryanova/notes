@@ -5,7 +5,7 @@ import {
 	authStorage,
 	AuthContext,
 } from 'features/auth';
-import { createUser, User, validateUser } from 'entities/User';
+import { createUser, User, validateUser, getUserByEmail } from 'entities/User';
 
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 	const [user, setUser] = useState<User | null>(() =>
@@ -14,23 +14,32 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 
 	const signin = async (email: string, password: string, callback: VoidFunction) => {
 		const validUser = await validateUser(email, password);
-		if (validUser) {
-			setUser(validUser);
-			authStorage.saveUserToLocalStorage(validUser);
-			callback();
-		} else {
-			throw new Error('Invalid email or password');
+
+		if (!validUser) {
+			const existingUser = await getUserByEmail(email);
+			if (!existingUser) {
+				throw new Error('Неверный email пользователя');
+			}
+			throw new Error('Пароль неверный');
 		}
+		setUser(validUser);
+		authStorage.saveUserToLocalStorage(validUser);
+		callback();
 	};
 
 	const signup = async (email: string, password: string, callback: VoidFunction) => {
+		const existingUser = await getUserByEmail(email);
+		if (existingUser) {
+			throw new Error('Данный пользователь уже существует');
+		}
+
 		const newUser = await createUser(email, password);
 		if (newUser) {
 			setUser(newUser);
 			authStorage.saveUserToLocalStorage(newUser);
 			callback();
 		} else {
-			throw new Error('Registration failed');
+			throw new Error('Регистрация не удалась');
 		}
 	};
 

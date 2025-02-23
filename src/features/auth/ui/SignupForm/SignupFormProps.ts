@@ -4,4 +4,6 @@ export interface SignupFormProps {
 		password: string;
 		confirmPassword: string;
 	}) => void;
+	error: string | null;
+	onErrorReset: () => void;
 }

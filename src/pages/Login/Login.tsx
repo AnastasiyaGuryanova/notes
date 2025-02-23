@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { Box, Title, Anchor } from '@mantine/core';
 import { useAuth, SigninForm, SignupForm } from 'features/auth';
 import { SigninUserType, SignupUserType } from 'shared/types';
@@ -7,27 +7,48 @@ import { internalPaths } from 'shared/constants';
 
 export const Login: FC = () => {
 	const [isSignup, setIsSignup] = useState(false);
+	const [error, setError] = useState<string | null>(null);
 	const navigate = useNavigate();
 	const auth = useAuth();
-	const location = useLocation();
 
-	const from = location.state?.from || internalPaths.notes;
+	if (auth.user) {
+		return <Navigate to="/notes" />;
+	}
+	const from = auth.user ? internalPaths.notes : internalPaths.login;
 
-	const handleSignin = (formData: SigninUserType) => {
-		auth.signin(formData.email, formData.password, () => {
-			navigate(from, { replace: true });
-		});
+	const handleSignin = async (formData: SigninUserType) => {
+		try {
+			setError(null);
+			await auth.signin(formData.email, formData.password, () => {
+				navigate(from, { replace: true });
+			});
+		} catch (err) {
+			setError(err instanceof Error ? err.message : 'Ошибка входа');
+		}
 	};
 
-	const handleSignup = (formData: SignupUserType) => {
-		auth.signup(formData.email, formData.password, () => {
-			setIsSignup(false);
-			navigate(from, { replace: true });
-		});
+	const handleSignup = async (formData: SignupUserType) => {
+		try {
+			setError(null);
+			await auth.signup(formData.email, formData.password, () => {
+				setIsSignup(false);
+				navigate(from, { replace: true });
+			});
+		} catch (err) {
+			setError(
+				err instanceof Error ? err.message : 'Неизвестная ошибка при регистрации'
+			);
+		}
+	};
+
+	const handleErrorReset = () => {
+		setError(null);
 	};
 
 	return (
 		<Box
+			c="myColor.4"
+			bg="myColor.9"
 			style={{
 				display: 'flex',
 				flexDirection: 'column',
@@ -45,19 +66,27 @@ export const Login: FC = () => {
 			</Title>
 
 			{isSignup ? (
-				<SignupForm onSubmit={handleSignup} />
+				<SignupForm
+					onSubmit={handleSignup}
+					error={error}
+					onErrorReset={handleErrorReset}
+				/>
 			) : (
-				<SigninForm onSubmit={handleSignin} />
+				<SigninForm
+					onSubmit={handleSignin}
+					error={error}
+					onErrorReset={handleErrorReset}
+				/>
 			)}
 
 			<Anchor
 				component="button"
 				size="sm"
 				onClick={() => setIsSignup(!isSignup)}
+				c="myColor.4"
 				style={{
 					marginTop: '1rem',
 					cursor: 'pointer',
-					color: 'gray',
 				}}
 			>
 				{isSignup
