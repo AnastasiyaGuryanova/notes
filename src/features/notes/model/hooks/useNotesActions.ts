@@ -13,8 +13,8 @@ export const useNotesActions = () => {
 		await deleteNote(noteId);
 	};
 
-	const modifyNote = async (noteId: number, content: string) => {
-		await updateNote(noteId, content);
+	const modifyNote = async (noteId: number, title: string, content: string) => {
+		await updateNote(noteId, title, content);
 	};
 
 	return {

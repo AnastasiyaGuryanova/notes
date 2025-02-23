@@ -12,8 +12,12 @@ export const createNote = async (
 ): Promise<void> => {
 	await db.notes.add({ userId, title, content, updatedAt: new Date() });
 };
-export const updateNote = async (id: number, content: string): Promise<void> => {
-	await db.notes.update(id, { content, updatedAt: new Date() });
+export const updateNote = async (
+	id: number,
+	title: string,
+	content: string
+): Promise<void> => {
+	await db.notes.update(id, { title, content, updatedAt: new Date() });
 };
 
 export const deleteNote = async (id: number): Promise<void> => {

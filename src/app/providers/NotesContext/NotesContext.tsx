@@ -1,24 +1,17 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { Note } from 'entities/Note';
-import { useNotesActions, NotesProviderProps, NotesContext } from 'features/notes';
+import {
+	useNotesActions,
+	NotesProviderProps,
+	NotesContext,
+	NotesContextType,
+} from 'features/notes';
 import { useAuth } from 'features/auth';
-
-interface NotesContextType {
-	notes: Note[];
-	selectedNote: Note | null;
-	setSelectedNote: (note: Note | null) => void;
-	refreshNotes: () => void;
-	addNote: (title: string) => Promise<void>;
-	deleteSelectedNote: () => Promise<void>;
-	updateSelectedNote: (content: string) => Promise<void>;
-}
 
 export const NotesProvider: FC<NotesProviderProps> = ({ children }) => {
 	const { user } = useAuth();
 	const { fetchNotes, createNewNote, removeNote, modifyNote } = useNotesActions();
-
 	const [notes, setNotes] = useState<Note[]>([]);
-	const [selectedNote, setSelectedNote] = useState<Note | null>(null);
 
 	useEffect(() => {
 		if (user?.id) {
@@ -26,11 +19,11 @@ export const NotesProvider: FC<NotesProviderProps> = ({ children }) => {
 		}
 	}, [user?.id]);
 
-	const refreshNotes = async () => {
+	const refreshNotes = useCallback(async () => {
 		if (!user?.id) return;
 		const userNotes = await fetchNotes(user.id);
 		setNotes(userNotes);
-	};
+	}, [fetchNotes, user?.id]);
 
 	const addNote = async (title: string) => {
 		if (!user?.id) return;
@@ -38,29 +31,22 @@ export const NotesProvider: FC<NotesProviderProps> = ({ children }) => {
 		await refreshNotes();
 	};
 
-	const deleteSelectedNote = async () => {
-		if (selectedNote?.id) {
-			await removeNote(selectedNote.id);
-			setSelectedNote(null);
-			await refreshNotes();
-		}
+	const deleteNoteById = async (noteId: number) => {
+		await removeNote(noteId);
+		await refreshNotes();
 	};
 
-	const updateSelectedNote = async (content: string) => {
-		if (selectedNote?.id) {
-			await modifyNote(selectedNote.id, content);
-			await refreshNotes();
-		}
+	const updateNoteById = async (noteId: number, title: string, content: string) => {
+		await modifyNote(noteId, title, content);
+		await refreshNotes();
 	};
 
 	const value: NotesContextType = {
 		notes,
-		selectedNote,
-		setSelectedNote,
 		refreshNotes,
 		addNote,
-		deleteSelectedNote,
-		updateSelectedNote,
+		deleteNoteById,
+		updateNoteById,
 	};
 
 	return <NotesContext.Provider value={value}>{children}</NotesContext.Provider>;
