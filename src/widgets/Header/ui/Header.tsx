@@ -13,6 +13,7 @@ export const Header = ({ opened, toggle }: HeaderProps) => {
 		<AppShell.Header
 			style={{
 				backgroundColor: theme.colors.myColor[9],
+				border: 'none',
 			}}
 		>
 			<Box
