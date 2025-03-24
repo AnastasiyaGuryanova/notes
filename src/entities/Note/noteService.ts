@@ -9,9 +9,16 @@ export const createNote = async (
 	userId: string,
 	title: string,
 	content: string
-): Promise<void> => {
-	await db.notes.add({ userId, title, content, updatedAt: new Date() });
+): Promise<number> => {
+	const newNoteId = await db.notes.add({
+		userId,
+		title,
+		content,
+		updatedAt: new Date(),
+	});
+	return newNoteId;
 };
+
 export const updateNote = async (
 	id: number,
 	title: string,

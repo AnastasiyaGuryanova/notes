@@ -5,8 +5,13 @@ export const useNotesActions = () => {
 		return await getNotesByUser(userId);
 	};
 
-	const createNewNote = async (userId: string, title: string) => {
-		await createNote(userId, title, '');
+	const createNewNote = async (
+		userId: string,
+		title: string,
+		content: string = ''
+	): Promise<number> => {
+		const newNoteId = await createNote(userId, title, content);
+		return newNoteId;
 	};
 
 	const removeNote = async (noteId: number) => {

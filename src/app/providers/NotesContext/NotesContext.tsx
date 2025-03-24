@@ -25,10 +25,14 @@ export const NotesProvider: FC<NotesProviderProps> = ({ children }) => {
 		setNotes(userNotes);
 	}, [fetchNotes, user?.id]);
 
-	const addNote = async (title: string) => {
-		if (!user?.id) return;
-		await createNewNote(user.id, title);
+	const addNote = async (
+		title: string,
+		content: string
+	): Promise<number | undefined> => {
+		if (!user?.id) return undefined;
+		const newNoteId = await createNewNote(user.id, title, content);
 		await refreshNotes();
+		return newNoteId;
 	};
 
 	const deleteNoteById = async (noteId: number) => {

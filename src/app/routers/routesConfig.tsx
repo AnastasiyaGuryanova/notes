@@ -30,6 +30,15 @@ export const routesConfig: RouteConfig[] = [
 		isPrivate: true,
 	},
 	{
+		path: internalPaths.notesCard,
+		element: (
+			<SuspenseWithLoader>
+				<Notes />
+			</SuspenseWithLoader>
+		),
+		isPrivate: true,
+	},
+	{
 		path: internalPaths.login,
 		element: (
 			<SuspenseWithLoader>
