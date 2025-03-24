@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
 import { AppShell } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+import { useSidebar } from 'features/notes';
 import { Header } from 'widgets/Header';
 
 interface AppShellComponentProps {
@@ -8,7 +8,7 @@ interface AppShellComponentProps {
 }
 
 export const AppShellComponent: FC<AppShellComponentProps> = ({ children }) => {
-	const [opened, { toggle }] = useDisclosure();
+	const { opened, toggle } = useSidebar();
 
 	return (
 		<AppShell

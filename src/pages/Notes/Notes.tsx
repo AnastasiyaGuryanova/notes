@@ -1,26 +1,11 @@
-import { AppShell, Burger } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+import { Sidebar, Workspace } from 'features/notes';
+import { AppShellComponent } from 'widgets/AppShell';
 
 export const Notes = () => {
-	const [opened, { toggle }] = useDisclosure();
-
 	return (
-		<AppShell
-			header={{ height: 60 }}
-			navbar={{
-				width: 300,
-				breakpoint: 'sm',
-				collapsed: { mobile: !opened },
-			}}
-			padding="md"
-		>
-			<AppShell.Header>
-				<Burger opened={opened} onClick={toggle} hiddenFrom="md" size="md" />
-			</AppShell.Header>
-
-			<AppShell.Navbar p="md">Navbar</AppShell.Navbar>
-
-			<AppShell.Main>Main</AppShell.Main>
-		</AppShell>
+		<AppShellComponent>
+			<Sidebar />
+			<Workspace />
+		</AppShellComponent>
 	);
 };
