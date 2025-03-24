@@ -1,5 +1,5 @@
 import { Suspense, FC } from 'react';
-import { Loader } from '@mantine/core';
+import { Loader } from 'shared/ui';
 import { SuspenseWithLoaderProps } from './routes.types';
 
 export const SuspenseWithLoader: FC<SuspenseWithLoaderProps> = ({ children }) => {
