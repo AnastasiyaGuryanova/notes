@@ -30,7 +30,6 @@ export const TextInputModal: FC<TextInputModalProps> = ({
 			color="myColor.9"
 			c="myColor.7"
 			radius="md"
-			styles={{}}
 		>
 			<TextInput
 				value={inputValue}

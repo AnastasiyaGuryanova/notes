@@ -16,7 +16,6 @@ export const Modal: FC<ModalProps> = ({ opened, onClose, onConfirm, message }) =
 					flexDirection: 'column',
 					alignItems: 'center',
 					justifyContent: 'center',
-					textAlign: 'center',
 				},
 				header: {
 					width: '100%',
