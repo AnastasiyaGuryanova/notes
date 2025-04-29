@@ -1,4 +1,4 @@
-import { Note } from 'entities/Note';
+import { Note } from 'Entities/Note';
 
 export interface NotesContextType {
 	notes: Note[];

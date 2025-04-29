@@ -1,4 +1,4 @@
-import { getNotesByUser, createNote, deleteNote, updateNote } from 'entities/Note';
+import { getNotesByUser, createNote, deleteNote, updateNote } from 'Entities/Note';
 
 export const useNotesActions = () => {
 	const fetchNotes = async (userId: string) => {

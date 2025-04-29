@@ -5,7 +5,7 @@ import {
 	authStorage,
 	AuthContext,
 } from 'features/auth';
-import { createUser, User, validateUser, getUserByEmail } from 'entities/User';
+import { createUser, User, validateUser, getUserByEmail } from 'Entities/User';
 
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 	const [user, setUser] = useState<User | null>(() =>

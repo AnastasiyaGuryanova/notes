@@ -1,6 +1,6 @@
 import Dexie, { Table } from 'dexie';
-import { User } from 'entities/User';
-import { Note } from 'entities/Note';
+import { User } from 'Entities/User';
+import { Note } from 'Entities/Note';
 
 class NotesDB extends Dexie {
 	users!: Table<User>;

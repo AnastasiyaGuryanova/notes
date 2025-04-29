@@ -1,4 +1,4 @@
-import { User } from 'entities/User';
+import { User } from 'Entities/User';
 import { LOCAL_STORAGE_USER_KEY } from 'features/auth';
 
 const getUserFromLocalStorage = (): User | null => {
