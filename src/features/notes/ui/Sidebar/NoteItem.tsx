@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Box, Text } from '@mantine/core';
-import { Note } from 'entities/Note';
+import { Note } from 'Entities/Note';
 import { formatDateTimeNoSeconds } from 'shared/utils';
 
 interface NoteItemProps {
@@ -20,7 +20,15 @@ export const NoteItem: FC<NoteItemProps> = ({ note, onNoteClick }) => (
 		}}
 		onClick={() => onNoteClick(note.id as number)}
 	>
-		<Text>{note.title}</Text>
+		<Text
+			style={{
+				overflow: 'hidden',
+				textOverflow: 'ellipsis',
+				whiteSpace: 'nowrap',
+			}}
+		>
+			{note.title}
+		</Text>
 
 		<Text size="xs">{formatDateTimeNoSeconds(note.updatedAt)}</Text>
 	</Box>
