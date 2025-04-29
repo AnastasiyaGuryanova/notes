@@ -1,4 +1,4 @@
-import { FC, ChangeEvent, useState } from 'react';
+import { FC, ChangeEvent, useState, useEffect } from 'react';
 import { Modal as MantineModal, TextInput, Group } from '@mantine/core';
 import { Button } from 'Shared/ui';
 import { TextInputModalProps } from './TextInputModal.types';
@@ -13,6 +13,12 @@ export const TextInputModal: FC<TextInputModalProps> = ({
 	buttonText = 'Подтвердить',
 }) => {
 	const [inputValue, setInputValue] = useState(initialValue);
+
+	useEffect(() => {
+		if (opened) {
+			setInputValue(initialValue);
+		}
+	}, [opened, initialValue]);
 
 	const handleConfirm = () => {
 		if (inputValue.trim()) {
