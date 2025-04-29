@@ -1,5 +1,5 @@
 import { FC, useCallback, useEffect, useState } from 'react';
-import { Note } from 'entities/Note';
+import { Note } from 'Entities/Note';
 import {
 	useNotesActions,
 	NotesProviderProps,
@@ -37,12 +37,18 @@ export const NotesProvider: FC<NotesProviderProps> = ({ children }) => {
 
 	const deleteNoteById = async (noteId: number) => {
 		await removeNote(noteId);
-		await refreshNotes();
+		setNotes((prevNotes) => prevNotes.filter((note) => note.id !== noteId));
 	};
 
 	const updateNoteById = async (noteId: number, title: string, content: string) => {
 		await modifyNote(noteId, title, content);
-		await refreshNotes();
+		setNotes((prevNotes) =>
+			prevNotes.map((note) =>
+				note.id === noteId
+					? { ...note, title, content, updatedAt: new Date() }
+					: note
+			)
+		);
 	};
 
 	const value: NotesContextType = {
