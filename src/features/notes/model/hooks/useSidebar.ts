@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { SidebarContextType, SidebarContext } from 'features/notes';
+import { SidebarContextType, SidebarContext } from 'Features/notes';
 
 export const useSidebar = (): SidebarContextType => {
 	const context = useContext(SidebarContext);

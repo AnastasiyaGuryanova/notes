@@ -1,9 +1,9 @@
 import { FC, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { Box, Title, Anchor } from '@mantine/core';
-import { useAuth, SigninForm, SignupForm } from 'features/auth';
-import { SigninUserType, SignupUserType } from 'shared/types';
-import { internalPaths } from 'shared/constants';
+import { useAuth, SigninForm, SignupForm } from 'Features/auth';
+import { SigninUserType, SignupUserType } from 'Shared/types';
+import { internalPaths } from 'Shared/constants';
 
 export const Login: FC = () => {
 	const [isSignup, setIsSignup] = useState(false);

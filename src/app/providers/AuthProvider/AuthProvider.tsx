@@ -4,7 +4,7 @@ import {
 	AuthProviderProps,
 	authStorage,
 	AuthContext,
-} from 'features/auth';
+} from 'Features/auth';
 import { createUser, User, validateUser, getUserByEmail } from 'Entities/User';
 
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {

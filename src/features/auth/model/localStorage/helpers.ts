@@ -1,5 +1,5 @@
 import { User } from 'Entities/User';
-import { LOCAL_STORAGE_USER_KEY } from 'features/auth';
+import { LOCAL_STORAGE_USER_KEY } from 'Features/auth';
 
 const getUserFromLocalStorage = (): User | null => {
 	const storedUser = localStorage.getItem(LOCAL_STORAGE_USER_KEY);

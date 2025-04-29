@@ -1,5 +1,5 @@
 import { Component, ReactNode } from 'react';
-import { ErrorComponent } from 'shared/ui';
+import { ErrorComponent } from 'Shared/ui';
 import { ErrorBoundaryProps, ErrorBoundaryState } from './ErrorBoundary.types';
 
 export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {

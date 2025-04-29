@@ -5,8 +5,8 @@ import {
 	NotesProviderProps,
 	NotesContext,
 	NotesContextType,
-} from 'features/notes';
-import { useAuth } from 'features/auth';
+} from 'Features/notes';
+import { useAuth } from 'Features/auth';
 
 export const NotesProvider: FC<NotesProviderProps> = ({ children }) => {
 	const { user } = useAuth();

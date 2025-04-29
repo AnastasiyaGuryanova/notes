@@ -1,6 +1,6 @@
 import { FC, ChangeEvent, useState } from 'react';
 import { Modal as MantineModal, TextInput, Group } from '@mantine/core';
-import { Button } from 'shared/ui';
+import { Button } from 'Shared/ui';
 import { TextInputModalProps } from './TextInputModal.types';
 
 export const TextInputModal: FC<TextInputModalProps> = ({

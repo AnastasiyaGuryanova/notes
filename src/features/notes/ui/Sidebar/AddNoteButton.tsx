@@ -2,8 +2,8 @@ import { FC, useState } from 'react';
 import { Text, Group } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
 import { IconPlus } from '@tabler/icons-react';
-import { Button, TextInputModal } from 'shared/ui';
-import { useNotes } from 'features/notes';
+import { Button, TextInputModal } from 'Shared/ui';
+import { useNotes } from 'Features/notes';
 
 export const AddNoteButton: FC = () => {
 	const [isModalOpen, setIsModalOpen] = useState(false);

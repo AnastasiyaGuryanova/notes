@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Group, Modal as MantineModal } from '@mantine/core';
-import { Button } from 'shared/ui';
+import { Button } from 'Shared/ui';
 import { ModalProps } from './Modal.types';
 
 export const Modal: FC<ModalProps> = ({ opened, onClose, onConfirm, message }) => {

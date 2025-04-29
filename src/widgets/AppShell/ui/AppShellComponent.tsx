@@ -1,7 +1,7 @@
 import { FC, ReactNode } from 'react';
 import { AppShell } from '@mantine/core';
-import { useSidebar } from 'features/notes';
-import { Header } from 'widgets/Header';
+import { useSidebar } from 'Features/notes';
+import { Header } from 'Widgets/Header';
 
 interface AppShellComponentProps {
 	children: ReactNode;

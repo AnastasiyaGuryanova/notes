@@ -1,4 +1,4 @@
-import { db } from 'shared/api';
+import { db } from 'Shared/api';
 import { Note } from './noteModel';
 
 export const getNotesByUser = async (userId: string): Promise<Note[]> => {

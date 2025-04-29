@@ -1,6 +1,6 @@
 import { FC, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useNotes } from 'features/notes';
+import { useNotes } from 'Features/notes';
 import { AppShell } from '@mantine/core';
 import { NoNoteSelected } from './NoNoteSelected';
 import { NoteEditor } from './NoteEditor';

@@ -1,5 +1,5 @@
 import { AppShell, Burger, Group, Box, useMantineTheme } from '@mantine/core';
-import { LogoutButton } from 'features/auth';
+import { LogoutButton } from 'Features/auth';
 
 interface HeaderProps {
 	opened: boolean;

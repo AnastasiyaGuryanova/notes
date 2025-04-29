@@ -3,9 +3,9 @@ import { marked } from 'marked';
 import { Group, Box, Flex, Stack, ActionIcon } from '@mantine/core';
 import { IconPencil, IconTrash } from '@tabler/icons-react';
 import { Note } from 'Entities/Note';
-import { useNotes } from 'features/notes';
+import { useNotes } from 'Features/notes';
 import { EditableTitle } from './EditableTitle';
-import { Modal } from 'shared/ui';
+import { Modal } from 'Shared/ui';
 
 export const NoteViewer: FC<{ note: Note; onEdit: () => void }> = ({ note, onEdit }) => {
 	const { updateNoteById, deleteNoteById } = useNotes();

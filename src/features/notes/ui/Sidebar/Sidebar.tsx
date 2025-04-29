@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { AppShell, useMantineTheme, Box } from '@mantine/core';
-import { useFilteredNotes } from 'features/notes';
+import { useFilteredNotes } from 'Features/notes';
 import { AddNoteButton } from './AddNoteButton';
 import { NoteList } from './NoteList';
 import { SearchBox } from './SearchBox';
