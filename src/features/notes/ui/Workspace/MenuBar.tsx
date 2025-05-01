@@ -1,22 +1,17 @@
 import { FC } from 'react';
-import { Group, ActionIcon } from '@mantine/core';
+import { Flex, ActionIcon } from '@mantine/core';
 import {
 	IconBold,
 	IconItalic,
 	IconStrikethrough,
 	IconCode,
-	IconClearFormatting,
-	IconClearAll,
 	IconTextCaption,
 	IconH1,
 	IconH2,
 	IconH3,
 	IconH4,
-	IconH5,
-	IconH6,
 	IconList,
 	IconListNumbers,
-	IconCodeAsterix,
 	IconBlockquote,
 	IconMinus,
 	IconArrowBackUp,
@@ -32,73 +27,61 @@ export const MenuBar: FC<MenuBarProps> = ({ editor, isTitleEditing }) => {
 	if (!editor) return null;
 
 	return (
-		<Group gap="xs" wrap="wrap">
+		<Flex gap="xs" wrap="wrap">
 			<ActionIcon
 				onClick={() => editor.chain().focus().toggleBold().run()}
 				variant={editor.isActive('bold') ? 'filled' : 'outline'}
 				disabled={
 					isTitleEditing || !editor.can().chain().focus().toggleBold().run()
 				}
-				color="blue"
+				color="myColor.9"
 				title="Жирный"
 			>
 				<IconBold size={18} />
 			</ActionIcon>
+
 			<ActionIcon
 				onClick={() => editor.chain().focus().toggleItalic().run()}
 				variant={editor.isActive('italic') ? 'filled' : 'outline'}
 				disabled={
 					isTitleEditing || !editor.can().chain().focus().toggleItalic().run()
 				}
-				color="blue"
+				color="myColor.9"
 				title="Курсив"
 			>
 				<IconItalic size={18} />
 			</ActionIcon>
+
 			<ActionIcon
 				onClick={() => editor.chain().focus().toggleStrike().run()}
 				variant={editor.isActive('strike') ? 'filled' : 'outline'}
 				disabled={
 					isTitleEditing || !editor.can().chain().focus().toggleStrike().run()
 				}
-				color="blue"
+				color="myColor.9"
 				title="Зачеркнутый"
 			>
 				<IconStrikethrough size={18} />
 			</ActionIcon>
+
 			<ActionIcon
-				onClick={() => editor.chain().focus().toggleCode().run()}
-				variant={editor.isActive('code') ? 'filled' : 'outline'}
+				onClick={() => editor.chain().focus().toggleCodeBlock().run()}
+				variant={editor.isActive('codeBlock') ? 'filled' : 'outline'}
 				disabled={
-					isTitleEditing || !editor.can().chain().focus().toggleCode().run()
+					isTitleEditing ||
+					!editor.can().chain().focus().toggleCodeBlock().run()
 				}
-				color="blue"
-				title="Код"
+				color="myColor.9"
+				title="Блок кода"
 			>
 				<IconCode size={18} />
-			</ActionIcon>
-			<ActionIcon
-				onClick={() => editor.chain().focus().unsetAllMarks().run()}
-				disabled={isTitleEditing}
-				color="blue"
-				title="Очистить форматирование"
-			>
-				<IconClearFormatting size={18} />
-			</ActionIcon>
-			<ActionIcon
-				onClick={() => editor.chain().focus().clearNodes().run()}
-				disabled={isTitleEditing}
-				color="blue"
-				title="Очистить узлы"
-			>
-				<IconClearAll size={18} />
 			</ActionIcon>
 
 			<ActionIcon
 				onClick={() => editor.chain().focus().setParagraph().run()}
 				variant={editor.isActive('paragraph') ? 'filled' : 'outline'}
 				disabled={isTitleEditing}
-				color="blue"
+				color="myColor.9"
 				title="Абзац"
 			>
 				<IconTextCaption size={18} />
@@ -111,7 +94,7 @@ export const MenuBar: FC<MenuBarProps> = ({ editor, isTitleEditing }) => {
 					isTitleEditing ||
 					!editor.can().chain().focus().toggleHeading({ level: 1 }).run()
 				}
-				color="blue"
+				color="myColor.9"
 				title="Заголовок 1"
 			>
 				<IconH1 size={18} />
@@ -124,7 +107,7 @@ export const MenuBar: FC<MenuBarProps> = ({ editor, isTitleEditing }) => {
 					isTitleEditing ||
 					!editor.can().chain().focus().toggleHeading({ level: 2 }).run()
 				}
-				color="blue"
+				color="myColor.9"
 				title="Заголовок 2"
 			>
 				<IconH2 size={18} />
@@ -137,7 +120,7 @@ export const MenuBar: FC<MenuBarProps> = ({ editor, isTitleEditing }) => {
 					isTitleEditing ||
 					!editor.can().chain().focus().toggleHeading({ level: 3 }).run()
 				}
-				color="blue"
+				color="myColor.9"
 				title="Заголовок 3"
 			>
 				<IconH3 size={18} />
@@ -150,36 +133,10 @@ export const MenuBar: FC<MenuBarProps> = ({ editor, isTitleEditing }) => {
 					isTitleEditing ||
 					!editor.can().chain().focus().toggleHeading({ level: 4 }).run()
 				}
-				color="blue"
+				color="myColor.9"
 				title="Заголовок 4"
 			>
 				<IconH4 size={18} />
-			</ActionIcon>
-
-			<ActionIcon
-				onClick={() => editor.chain().focus().toggleHeading({ level: 5 }).run()}
-				variant={editor.isActive('heading', { level: 5 }) ? 'filled' : 'outline'}
-				disabled={
-					isTitleEditing ||
-					!editor.can().chain().focus().toggleHeading({ level: 5 }).run()
-				}
-				color="blue"
-				title="Заголовок 5"
-			>
-				<IconH5 size={18} />
-			</ActionIcon>
-
-			<ActionIcon
-				onClick={() => editor.chain().focus().toggleHeading({ level: 6 }).run()}
-				variant={editor.isActive('heading', { level: 6 }) ? 'filled' : 'outline'}
-				disabled={
-					isTitleEditing ||
-					!editor.can().chain().focus().toggleHeading({ level: 6 }).run()
-				}
-				color="blue"
-				title="Заголовок 6"
-			>
-				<IconH6 size={18} />
 			</ActionIcon>
 
 			<ActionIcon
@@ -189,7 +146,7 @@ export const MenuBar: FC<MenuBarProps> = ({ editor, isTitleEditing }) => {
 					isTitleEditing ||
 					!editor.can().chain().focus().toggleBulletList().run()
 				}
-				color="blue"
+				color="myColor.9"
 				title="Маркированный список"
 			>
 				<IconList size={18} />
@@ -202,23 +159,10 @@ export const MenuBar: FC<MenuBarProps> = ({ editor, isTitleEditing }) => {
 					isTitleEditing ||
 					!editor.can().chain().focus().toggleOrderedList().run()
 				}
-				color="blue"
+				color="myColor.9"
 				title="Нумерованный список"
 			>
 				<IconListNumbers size={18} />
-			</ActionIcon>
-
-			<ActionIcon
-				onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-				variant={editor.isActive('codeBlock') ? 'filled' : 'outline'}
-				disabled={
-					isTitleEditing ||
-					!editor.can().chain().focus().toggleCodeBlock().run()
-				}
-				color="blue"
-				title="Блок кода"
-			>
-				<IconCodeAsterix size={18} />
 			</ActionIcon>
 
 			<ActionIcon
@@ -228,7 +172,7 @@ export const MenuBar: FC<MenuBarProps> = ({ editor, isTitleEditing }) => {
 					isTitleEditing ||
 					!editor.can().chain().focus().toggleBlockquote().run()
 				}
-				color="blue"
+				color="myColor.9"
 				title="Цитата"
 			>
 				<IconBlockquote size={18} />
@@ -237,7 +181,7 @@ export const MenuBar: FC<MenuBarProps> = ({ editor, isTitleEditing }) => {
 			<ActionIcon
 				onClick={() => editor.chain().focus().setHorizontalRule().run()}
 				disabled={isTitleEditing}
-				color="blue"
+				color="myColor.9"
 				title="Горизонтальная линия"
 			>
 				<IconMinus size={18} />
@@ -246,11 +190,11 @@ export const MenuBar: FC<MenuBarProps> = ({ editor, isTitleEditing }) => {
 			<ActionIcon
 				onClick={() => editor.chain().focus().undo().run()}
 				disabled={isTitleEditing || !editor.can().chain().focus().undo().run()}
-				color="blue"
+				color="myColor.9"
 				title="Отменить"
 			>
 				<IconArrowBackUp size={18} />
 			</ActionIcon>
-		</Group>
+		</Flex>
 	);
 };

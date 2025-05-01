@@ -14,11 +14,17 @@ export const useNoteEditor = (
 			StarterKit.configure({
 				bulletList: {
 					keepMarks: true,
-					keepAttributes: false,
+					keepAttributes: true,
 				},
 				orderedList: {
 					keepMarks: true,
-					keepAttributes: false,
+					keepAttributes: true,
+				},
+				codeBlock: {
+					HTMLAttributes: { class: 'language-markdown' },
+				},
+				heading: {
+					levels: [1, 2, 3, 4, 5, 6],
 				},
 			}),
 			Markdown.configure({
@@ -26,17 +32,30 @@ export const useNoteEditor = (
 				tightLists: true,
 				bulletListMarker: '-',
 				breaks: true,
+				transformPastedText: true,
 			}),
-
 			TextStyle,
 		],
-		content: note?.content || '# Start typing...',
+		content: note?.content || 'Начните печатать...',
 		onUpdate: debounce(({ editor }) => {
 			if (note && note.id) {
 				const content = editor.storage.markdown.getMarkdown();
 				updateNote(note.id, note.title, content);
 			}
 		}, 500),
+		editorProps: {
+			handleKeyDown: (view, event) => {
+				if (
+					event.key === 'Enter' &&
+					view.state.selection.$head.parent.type.name === 'codeBlock'
+				) {
+					event.preventDefault();
+					view.dispatch(view.state.tr.insertText('\n'));
+					return true;
+				}
+				return false;
+			},
+		},
 	});
 
 	return editor;

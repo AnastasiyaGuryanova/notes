@@ -6,6 +6,7 @@ import { EditorContent } from '@tiptap/react';
 import { EditableTitle } from './EditableTitle';
 import { MenuBar } from './MenuBar';
 import { IconX } from '@tabler/icons-react';
+import './styles/editorStyles.css';
 
 export const NoteEditor: FC<{ note: Note; onClose: () => void }> = ({
 	note,
@@ -50,9 +51,6 @@ export const NoteEditor: FC<{ note: Note; onClose: () => void }> = ({
 				style={{
 					padding: '16px',
 					minHeight: '300px',
-					borderRadius: '8px',
-					backgroundColor: '#F8F9FA',
-					boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)',
 					fontSize: '16px',
 				}}
 			/>

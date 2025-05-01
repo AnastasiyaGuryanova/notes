@@ -14,7 +14,15 @@ export const PaperWrapper: FC<PaperWrapperProps> = ({ children }) => {
 	}
 
 	return (
-		<Paper p="md" radius="md" bg="gray.0" withBorder>
+		<Paper
+			p="md"
+			radius="md"
+			bg="myColor.0"
+			withBorder
+			style={{
+				borderColor: 'var(--mantine-color-myColor-8)',
+			}}
+		>
 			{children}
 		</Paper>
 	);

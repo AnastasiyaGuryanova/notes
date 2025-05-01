@@ -1,11 +1,12 @@
 import { FC, useState } from 'react';
 import { marked } from 'marked';
-import { Group, Box, Flex, Stack, ActionIcon } from '@mantine/core';
+import { Flex, Box, Stack, ActionIcon } from '@mantine/core';
 import { IconPencil, IconTrash } from '@tabler/icons-react';
 import { Note } from 'Entities/Note';
 import { useNotes } from 'Features/notes';
 import { EditableTitle } from './EditableTitle';
 import { Modal } from 'Shared/ui';
+import './styles/editorStyles.css';
 
 export const NoteViewer: FC<{ note: Note; onEdit: () => void }> = ({ note, onEdit }) => {
 	const { updateNoteById, deleteNoteById } = useNotes();
@@ -37,7 +38,7 @@ export const NoteViewer: FC<{ note: Note; onEdit: () => void }> = ({ note, onEdi
 						onSave={() => setIsTitleEditing(false)}
 						setIsTitleEditing={setIsTitleEditing}
 					/>
-					<Group gap="xs" justify="space-between" align="center">
+					<Flex gap="xs" justify="space-between" align="center">
 						<ActionIcon
 							onClick={onEdit}
 							disabled={isTitleEditing}
@@ -56,20 +57,12 @@ export const NoteViewer: FC<{ note: Note; onEdit: () => void }> = ({ note, onEdi
 						>
 							<IconTrash size={18} />
 						</ActionIcon>
-					</Group>
+					</Flex>
 				</Flex>
 
 				<Box
+					className="markdown-content"
 					dangerouslySetInnerHTML={{ __html: markdown }}
-					style={{
-						maxWidth: '100%',
-						wordBreak: 'break-word',
-						overflow: 'auto',
-						padding: '8px',
-						fontSize: '16px',
-						lineHeight: '1.55',
-						'& p': { margin: 0 },
-					}}
 				/>
 			</Stack>
 

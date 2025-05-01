@@ -20,7 +20,7 @@ export const Workspace: FC = () => {
 
 	if (!note) {
 		return (
-			<AppShell.Main>
+			<AppShell.Main bg="myColor.0">
 				<PaperWrapper>
 					<NoNoteSelected />
 				</PaperWrapper>
@@ -29,7 +29,7 @@ export const Workspace: FC = () => {
 	}
 
 	return (
-		<AppShell.Main>
+		<AppShell.Main bg="myColor.0">
 			<PaperWrapper>
 				{isEditing ? (
 					<NoteEditor note={note} onClose={() => setIsEditing(false)} />
